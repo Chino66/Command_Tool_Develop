@@ -1,0 +1,8 @@
+{
+  "name": "com.chino.git.cmdtool",
+  "displayName": "Command Tool",
+  "version": "0.0.1",
+  "unity": "2020.3",
+  "description": "unity下的cmd工具",
+  "type": "tool"
+}
