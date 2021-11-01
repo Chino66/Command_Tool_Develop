@@ -5,9 +5,15 @@ using Debug = UnityEngine.Debug;
 
 namespace CommandTool
 {
-    public delegate void ProcessOutput(string result);
+    public delegate void ProcessCallback(string result);
 
-    public delegate void CmdOutput(Queue<string> msgs);
+    public delegate void CommandCallback(CommandContext ctx);
+
+    public class CommandContext
+    {
+        public string Command;
+        public Queue<string> Messages;
+    }
 
     public class ProcessProxy
     {
@@ -29,20 +35,14 @@ namespace CommandTool
 
         private Process _process;
 
-        private ProcessOutput _processOutput;
+        private ProcessCallback _processCallback;
 
-        private CmdOutput _currentCallback;
-
-        /// <summary>
-        /// 返回的消息是否需要包含执行的命令
-        /// 用于调试
-        /// </summary>
-        // private bool _debugInfo = true;
+        private CommandCallback _currentCallback;
 
         /// <summary>
         /// 命令执行完成的返回消息队列
         /// </summary>
-        private Queue<string> _returnMsgs;
+        private readonly Queue<string> _returnMessages;
 
         /// <summary>
         /// 调试模式,显示接收到的所有消息
@@ -54,22 +54,24 @@ namespace CommandTool
         /// </summary>
         private bool _handleMsg = false;
 
-        private TaskCondition _condition;
+        private readonly TaskCondition _condition;
 
         public ProcessProxy()
         {
-            _process = new Process();
-
-            _process.StartInfo.FileName = "cmd.exe";
-            _process.StartInfo.CreateNoWindow = true;
-            _process.StartInfo.UseShellExecute = false;
-            _process.StartInfo.RedirectStandardError = true;
-            _process.StartInfo.RedirectStandardInput = true;
-            _process.StartInfo.RedirectStandardOutput = true;
-
+            _process = new Process
+            {
+                StartInfo =
+                {
+                    FileName = "cmd.exe",
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardError = true,
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true
+                }
+            };
             _condition = new TaskCondition();
-
-            _returnMsgs = new Queue<string>();
+            _returnMessages = new Queue<string>();
             RegisterProcessOutput(MessageHandle);
         }
 
@@ -78,19 +80,19 @@ namespace CommandTool
             _debugMode = value;
         }
 
-        public void RegisterProcessOutput(ProcessOutput func)
+        public void RegisterProcessOutput(ProcessCallback func)
         {
             if (func != null)
             {
-                _processOutput += func;
+                _processCallback += func;
             }
         }
 
-        public void UnregisterProcessOutput(ProcessOutput func)
+        public void UnregisterProcessOutput(ProcessCallback func)
         {
-            if (_processOutput != null && func != null)
+            if (_processCallback != null && func != null)
             {
-                _processOutput -= func;
+                _processCallback -= func;
             }
         }
 
@@ -104,9 +106,9 @@ namespace CommandTool
             Run(ECHO_OFF);
         }
 
-        public void Run(string cmd, CmdOutput callback = null, bool debug = false)
+        public void Run(string cmd, CommandCallback callback = null, bool debug = false)
         {
-            _returnMsgs.Clear();
+            _returnMessages.Clear();
 
             _currentCallback = callback;
             _debugMode = debug;
@@ -116,7 +118,7 @@ namespace CommandTool
         }
 
         public async Task<bool> RunAsync(string cmd,
-            CmdOutput callback = null,
+            CommandCallback callback = null,
             bool debug = false,
             int timeout = 10000)
         {
@@ -129,7 +131,7 @@ namespace CommandTool
             _condition.Start();
             _condition.Timeout = timeout;
 
-            _returnMsgs.Clear();
+            _returnMessages.Clear();
             _currentCallback = callback;
             _debugMode = debug;
             _process.StandardInput.WriteLine(cmd);
@@ -151,36 +153,31 @@ namespace CommandTool
                 {
                     _handleMsg = true;
                 }
-                
+
                 return;
             }
 
             if (msg.Equals(COMMAND_RETURN))
             {
-                var msgs = new Queue<string>();
-                // var command = _returnMsgs.Dequeue();
+                var messages = new Queue<string>();
+                var command = _returnMessages.Dequeue();
 
-                // if (_debugInfo)
-                // {
-                //     msgs.Enqueue(command);
-                // }
-
-                while (_returnMsgs.Count > 0)
+                while (_returnMessages.Count > 0)
                 {
-                    var line = _returnMsgs.Dequeue();
+                    var line = _returnMessages.Dequeue();
                     if (!line.Contains(ProcessProxy.COMMAND_RETURN))
                     {
-                        msgs.Enqueue(line);
+                        messages.Enqueue(line);
                     }
                 }
 
-                // 如果没有任何返回值,则默认添加一个"\n"换行符
-                if (msgs.Count == 0)
+                var ctx = new CommandContext
                 {
-                    // msgs.Enqueue("\n");
-                }
+                    Command = command,
+                    Messages = new Queue<string>(messages)
+                };
 
-                _currentCallback?.Invoke(new Queue<string>(msgs));
+                _currentCallback?.Invoke(ctx);
 
                 if (_condition.IsRunning)
                 {
@@ -189,7 +186,7 @@ namespace CommandTool
             }
             else
             {
-                _returnMsgs.Enqueue(msg);
+                _returnMessages.Enqueue(msg);
             }
         }
 
@@ -197,7 +194,7 @@ namespace CommandTool
         {
             Run("exit");
             _process.Close();
-            _processOutput = null;
+            _processCallback = null;
             _process = null;
         }
 
@@ -205,7 +202,7 @@ namespace CommandTool
         {
             if (e.Data != null)
             {
-                _processOutput?.Invoke(e.Data);
+                _processCallback?.Invoke(e.Data);
             }
         }
     }

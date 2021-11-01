@@ -24,12 +24,12 @@ namespace CommandTool
             Proxy.Start();
         }
 
-        public static void Run(string cmd, CmdOutput callback, bool debug = false)
+        public static void Run(string cmd, CommandCallback callback, bool debug = false)
         {
             Proxy.Run(cmd, callback, debug);
         }
 
-        public static async Task<bool> RunAsync(string cmd, CmdOutput callback, bool debug = false, int timeout = 10000)
+        public static async Task<bool> RunAsync(string cmd, CommandCallback callback, bool debug = false, int timeout = 10000)
         {
             return await Proxy.RunAsync(cmd, callback, debug, timeout);
         }

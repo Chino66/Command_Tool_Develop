@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+
 //using UPMTool;
 
 namespace CommandTool
@@ -111,9 +112,9 @@ namespace CommandTool
             {
                 returnMsgs.Clear();
 
-                RunCmd(inputText.value, (msgs) =>
+                RunCmd(inputText.value, (ctx) =>
                 {
-                    returnMsgs = msgs;
+                    returnMsgs = ctx.Messages;
                     _cmdReturnFlag = true;
 //                returnMsgs.Enqueue(msg);
 //                if (msg.Equals(ProcessProxy.CommandReturnFlag))
@@ -133,7 +134,7 @@ namespace CommandTool
             InputButton.SetEnabled(enable);
         }
 
-        public void RunCmd(string cmd, CmdOutput callback)
+        public void RunCmd(string cmd, CommandCallback callback)
         {
             proxy.Run(cmd, callback);
         }
