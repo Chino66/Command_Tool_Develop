@@ -74,7 +74,7 @@ public class Test : MonoBehaviour
             foreach (var msg in msgs)
             {
 //                content += $"{msg}\n";
-                Debug.Log(msg);
+                Debug.Log("RunAsync:" + msg);
             }
 
 //            _jObject = JsonConvert.DeserializeObject<JObject>(content);

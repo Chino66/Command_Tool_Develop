@@ -170,7 +170,7 @@ namespace CommandTool
                 while (returnMsgs.Count > 0)
                 {
                     var line = returnMsgs.Dequeue();
-                    if (!line.Contains(ProcessProxy.CommandReturnFlag))
+                    if (!line.Contains(ProcessProxy.COMMAND_RETURN))
                     {
                         content += line + "\n";
                     }
