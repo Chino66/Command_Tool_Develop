@@ -4,9 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using CommandTool;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using UnityEditor;
 
 public class Test : MonoBehaviour
 {
@@ -68,55 +66,55 @@ public class Test : MonoBehaviour
 
     private async void RunAsync()
     {
-        string token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
-        foreach (DictionaryEntry variable in Environment.GetEnvironmentVariables())
-        {
-            Debug.Log($"{variable.Key}:{variable.Value}");
-        }
-
-        return;
-        Debug.Log(token);
-        await Command.RunAsync($"echo {token}", (ctx) =>
-        {
-            var content = "";
-            foreach (var msg in ctx.Messages)
-            {
-                Debug.Log("RunAsync:" + msg);
-//                content += msg;
-            }
-        }, false);
-//        
-
-        await Command.RunAsync("echo %GITHUB_TOKEN%", (ctx) =>
-        {
-            var content = "";
-            foreach (var msg in ctx.Messages)
-            {
-                Debug.Log("RunAsync:" + msg);
-//                content += msg;
-            }
-        }, false);
-//        
-//        var command =
-//            "curl -u Chino66:%GITHUB_TOKEN% -H \"Accept: application/vnd.github.v3+json\" https://api.github.com/users/chino66/packages?package_type=npm";
-//        await Command.RunAsync(command, (ctx) =>
+//        string token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
+//        foreach (DictionaryEntry variable in Environment.GetEnvironmentVariables())
+//        {
+//            Debug.Log($"{variable.Key}:{variable.Value}");
+//        }
+//
+//        return;
+//        Debug.Log(token);
+//        await Command.RunAsync($"echo {token}", (ctx) =>
 //        {
 //            var content = "";
 //            foreach (var msg in ctx.Messages)
 //            {
-////                Debug.Log("RunAsync:" + msg);
-//                content += msg;
-//            }
-//
-//            if (content != "")
-//            {
-//                _jArray = JArray.Parse(content);
-//                foreach (var child in _jArray.Children())
-//                {
-//                    Debug.Log($"{child["name"]}, {child["url"]}, {child["repository"]["description"]}");
-//                }
+//                Debug.Log("RunAsync:" + msg);
+////                content += msg;
 //            }
 //        }, false);
+////        
+//
+//        await Command.RunAsync("echo %GITHUB_TOKEN%", (ctx) =>
+//        {
+//            var content = "";
+//            foreach (var msg in ctx.Messages)
+//            {
+//                Debug.Log("RunAsync:" + msg);
+////                content += msg;
+//            }
+//        }, false);
+//        
+        var command =
+            "curl -u Chino66:%GITHUB_TOKEN% -H \"Accept: application/vnd.github.v3+json\" https://api.github.com/users/chino66/packages?package_type=npm";
+        await Command.RunAsync(command, (ctx) =>
+        {
+            var content = "";
+            foreach (var msg in ctx.Messages)
+            {
+//                Debug.Log("RunAsync:" + msg);
+                content += msg;
+            }
+
+            if (content != "")
+            {
+                _jArray = JArray.Parse(content);
+                foreach (var child in _jArray.Children())
+                {
+                    Debug.Log($"{child["name"]}, {child["url"]}, {child["repository"]["description"]}");
+                }
+            }
+        }, false);
     }
 
     CancellationTokenSource tokenSource2;

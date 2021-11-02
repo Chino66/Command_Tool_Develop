@@ -5,7 +5,7 @@ using Debug = UnityEngine.Debug;
 
 namespace CommandTool
 {
-    public delegate void ProcessCallback(string result);
+    public delegate void ProcessOutput(string result);
 
     public delegate void CommandCallback(CommandContext ctx);
 
@@ -33,9 +33,13 @@ namespace CommandTool
         private const string ECHO_OFF = "@ echo off";
 
 
+        /// <summary>
+        /// 关于Process
+        /// https://docs.microsoft.com/zh-cn/dotnet/api/system.diagnostics.process?view=net-5.0
+        /// </summary>
         private Process _process;
 
-        private ProcessCallback _processCallback;
+        private ProcessOutput _processOutput;
 
         private CommandCallback _currentCallback;
 
@@ -80,19 +84,19 @@ namespace CommandTool
             _debugMode = value;
         }
 
-        public void RegisterProcessOutput(ProcessCallback func)
+        public void RegisterProcessOutput(ProcessOutput func)
         {
             if (func != null)
             {
-                _processCallback += func;
+                _processOutput += func;
             }
         }
 
-        public void UnregisterProcessOutput(ProcessCallback func)
+        public void UnregisterProcessOutput(ProcessOutput func)
         {
-            if (_processCallback != null && func != null)
+            if (_processOutput != null && func != null)
             {
-                _processCallback -= func;
+                _processOutput -= func;
             }
         }
 
@@ -194,7 +198,7 @@ namespace CommandTool
         {
             Run("exit");
             _process.Close();
-            _processCallback = null;
+            _processOutput = null;
             _process = null;
         }
 
@@ -202,7 +206,7 @@ namespace CommandTool
         {
             if (e.Data != null)
             {
-                _processCallback?.Invoke(e.Data);
+                _processOutput?.Invoke(e.Data);
             }
         }
     }
