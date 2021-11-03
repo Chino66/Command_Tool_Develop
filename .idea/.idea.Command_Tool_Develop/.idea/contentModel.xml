@@ -15,6 +15,7 @@
             <e p="CommandTool.Editor.asmdef" t="Include" />
             <e p="CommandToolWindow.cs" t="Include" />
             <e p="ProcessProxy.cs" t="Include" />
+            <e p="TaskCondition.cs" t="Include" />
           </e>
         </e>
         <e p="Examples" t="Include">

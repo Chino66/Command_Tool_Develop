@@ -37,3 +37,9 @@ sysinfo.txt
 *.unitypackage
 Logs/*
 .idea/*
+Logs/ApiUpdaterCheck.txt
+Logs/AssetImportWorker0.log
+Logs/shadercompiler-AssetImportWorker0.log
+.idea/.idea.Command_Tool_Develop/.idea/contentModel.xml
+.idea/.idea.Command_Tool_Develop/.idea/indexLayout.xml
+.idea/.idea.Command_Tool_Develop/.idea/workspace.xml

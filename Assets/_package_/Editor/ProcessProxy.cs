@@ -107,7 +107,7 @@ namespace CommandTool
             _process.Start();
             _process.BeginOutputReadLine();
             _handleMsg = false;
-            Run(ECHO_OFF);
+            _process.StandardInput.WriteLine(ECHO_OFF);
         }
 
         public void Run(string cmd, CommandCallback callback = null, bool debug = false)
