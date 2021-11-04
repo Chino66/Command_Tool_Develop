@@ -11,11 +11,13 @@
             <e p="_generate_" t="Include">
               <e p="PackagePath.cs" t="Include" />
             </e>
-            <e p="Command.cs" t="Include" />
             <e p="CommandTool.Editor.asmdef" t="Include" />
-            <e p="CommandToolWindow.cs" t="Include" />
-            <e p="ProcessProxy.cs" t="Include" />
-            <e p="TaskCondition.cs" t="Include" />
+            <e p="CommondTool" t="Include">
+              <e p="Command.cs" t="Include" />
+              <e p="CommandToolWindow.cs" t="Include" />
+              <e p="ProcessProxy.cs" t="Include" />
+              <e p="TaskCondition.cs" t="Include" />
+            </e>
           </e>
         </e>
         <e p="Examples" t="Include">

@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.chino.upmtool": {
+      "version": "https://gitee.com/Chino66/UPM-Tool-Develop.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.0"
+      },
+      "hash": "6b1c001696a0aa3a28bcf2c5dd0c748973aeb7ad"
+    },
     "com.unity.collab-proxy": {
       "version": "1.5.7",
       "depth": 0,
