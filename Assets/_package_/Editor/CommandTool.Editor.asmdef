@@ -1,7 +1,9 @@
 {
     "name": "CommandTool.Editor",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:ffe1cacddd51ee440892dfa24e686b41"
+    ],
     "includePlatforms": [
         "Editor"
     ],

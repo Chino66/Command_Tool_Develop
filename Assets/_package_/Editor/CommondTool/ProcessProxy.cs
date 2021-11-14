@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using TaskKits;
 using Debug = UnityEngine.Debug;
 
 namespace CommandTool
@@ -132,16 +133,13 @@ namespace CommandTool
                 return false;
             }
 
-            _condition.Start();
-            _condition.Timeout = timeout;
-
             _returnMessages.Clear();
             _currentCallback = callback;
             _debugMode = debug;
             _process.StandardInput.WriteLine(cmd);
             _process.StandardInput.WriteLine(ECHO_COMMAND_RETURN);
 
-            return await TaskCondition.WaitUntil(_condition);
+            return await _condition.WaitUntilComplete(timeout);
         }
 
         private void MessageHandle(string msg)
