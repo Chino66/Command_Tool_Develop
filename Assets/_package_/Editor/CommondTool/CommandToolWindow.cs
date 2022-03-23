@@ -20,7 +20,7 @@ namespace CommandTool
         /// <summary>
         /// 进程代理类
         /// </summary>
-        private ProcessProxy _proxy;
+        private CmdProxy _proxy;
 
         /// <summary>
         /// 命令执行完成的返回消息队列
@@ -37,7 +37,7 @@ namespace CommandTool
         private void StartCMD()
         {
             _returnMsgs = new Queue<string>();
-            _proxy = new ProcessProxy();
+            _proxy = new CmdProxy();
             _proxy.Start();
             Debug.Log("启动cmd");
         }
@@ -175,7 +175,7 @@ namespace CommandTool
             while (_returnMsgs.Count > 0)
             {
                 var line = _returnMsgs.Dequeue();
-                if (!line.Contains(ProcessProxy.COMMAND_RETURN))
+                if (!line.Contains(CmdProxy.COMMAND_RETURN))
                 {
                     content += line + "\n";
                 }

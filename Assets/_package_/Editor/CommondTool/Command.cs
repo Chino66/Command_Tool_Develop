@@ -4,15 +4,15 @@ namespace CommandTool
 {
     public static class Command
     {
-        private static ProcessProxy _proxy;
+        private static CmdProxy _proxy;
 
-        public static ProcessProxy Proxy
+        public static CmdProxy Proxy
         {
             get
             {
                 if (_proxy == null)
                 {
-                    _proxy = new ProcessProxy();
+                    _proxy = new CmdProxy();
                 }
 
                 return _proxy;
