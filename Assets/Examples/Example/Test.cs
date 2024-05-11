@@ -12,8 +12,8 @@ public class Test : MonoBehaviour
 
     private void Start()
     {
-        proxy = new ProcessProxy();
-        proxy.Start();
+        // proxy = new ProcessProxy();
+        // proxy.Start();
 
 //        CancellationTaskExample2();
 //        tokenSource2?.Cancel();
@@ -21,19 +21,19 @@ public class Test : MonoBehaviour
 
     private void OnGUI()
     {
-        if (GUILayout.Button("Run Command"))
-        {
-            proxy.Run("ipconfig", (ctx) =>
-            {
-                var content = "";
-                foreach (var msg in ctx.Messages)
-                {
-                    content += $"{msg}\n";
-                }
-
-                Debug.Log(content);
-            });
-        }
+        // if (GUILayout.Button("Run Command"))
+        // {
+        //     proxy.Run("ipconfig", (ctx) =>
+        //     {
+        //         var content = "";
+        //         foreach (var msg in ctx.Messages)
+        //         {
+        //             content += $"{msg}\n";
+        //         }
+        //
+        //         Debug.Log(content);
+        //     });
+        // }
 
         if (GUILayout.Button("Command.Run"))
         {

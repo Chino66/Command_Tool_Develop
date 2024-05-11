@@ -1,11 +1,29 @@
 {
   "name": "com.chino.command.tool",
   "displayName": "Command Tool",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "unity": "2020.3",
   "description": "Unity实现cmd执行命令行",
   "type": "tool",
   "dependencies": {
-    "com.unity.nuget.newtonsoft-json": "2.0.0"
+    "com.unity.nuget.newtonsoft-json": "2.0.0",
+    "com.chino.task.kits": "0.0.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chino66/Command_Tool_Develop.git"
+  },
+  "author": "chino66",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chino66/Command_Tool_Develop/issues"
+  },
+  "homepage": "https://github.com/Chino66/Command_Tool_Develop#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@chino66"
   }
 }

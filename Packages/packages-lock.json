@@ -1,64 +1,133 @@
 {
   "dependencies": {
-    "com.chino.upmtool": {
-      "version": "https://gitee.com/Chino66/UPM-Tool-Develop.git#upm",
+    "com.chino.command.tool": {
+      "version": "0.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.0"
+      },
+      "url": "https://npm.pkg.github.com/@chino66"
+    },
+    "com.chino.data.binding": {
+      "version": "0.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://npm.pkg.github.com/@chino66"
+    },
+    "com.chino.github.unity.uec": {
+      "version": "https://github.com/Chino66/UEC.git#upm",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0"
       },
-      "hash": "6b1c001696a0aa3a28bcf2c5dd0c748973aeb7ad"
+      "hash": "f4f7e68f9a12ad7c467b27516bc58883c9aec846"
     },
-    "com.unity.collab-proxy": {
-      "version": "1.5.7",
+    "com.chino.object.pool": {
+      "version": "0.0.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://npm.pkg.github.com/@chino66"
+    },
+    "com.chino.package.kits": {
+      "version": "0.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://npm.pkg.github.com/@chino66"
+    },
+    "com.chino.task.kits": {
+      "version": "0.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://npm.pkg.github.com/@chino66"
+    },
+    "com.chino.uielements.kits": {
+      "version": "0.0.5",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://npm.pkg.github.com/@chino66"
+    },
+    "com.chino.upm.kits": {
+      "version": "0.0.17",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.nuget.newtonsoft-json": "2.0.0"
+        "com.chino.command.tool": "0.0.1",
+        "com.chino.data.binding": "0.0.1",
+        "com.chino.object.pool": "0.0.2",
+        "com.chino.package.kits": "0.0.1",
+        "com.chino.task.kits": "0.0.1",
+        "com.chino.uielements.kits": "0.0.5"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://npm.pkg.github.com/@chino66"
+    },
+    "com.unity.collab-proxy": {
+      "version": "1.17.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.services.core": "1.0.1"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "2.0.7",
+      "version": "3.0.15",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.test-framework": "1.1.1"
+        "com.unity.ext.nunit": "1.0.6"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.8",
+      "version": "2.0.16",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.9"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.ide.vscode": {
-      "version": "1.2.3",
+      "version": "1.2.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.nuget.newtonsoft-json": {
-      "version": "2.0.0",
+      "version": "3.0.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.services.core": {
+      "version": "1.4.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.nuget.newtonsoft-json": "3.0.2",
+        "com.unity.modules.androidjni": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.1.24",
+      "version": "1.1.31",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -66,7 +135,7 @@
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
       "version": "3.0.6",
@@ -75,10 +144,10 @@
       "dependencies": {
         "com.unity.ugui": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.4.8",
+      "version": "1.7.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -87,7 +156,7 @@
         "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.ugui": {
       "version": "1.0.0",
